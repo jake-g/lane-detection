@@ -41,7 +41,7 @@ using namespace cv;
 
 int main() {
 	int houghVote = 200;
-	string arg = "street.jpg";
+	string arg = "/Users/jake/Pictures/10997506_10153701034329896_2123105268369710113_o.jpg";
 	bool showSteps = 1;
 
 	string window_name = "Processed Video";
@@ -61,7 +61,7 @@ int main() {
 	VideoWriter oVideoWriter ("LaneDetection.avi", CV_FOURCC('P','I','M','1'), 20, frameSize, true); //initialize the VideoWriter object
 
         Mat image;
-	image = imread("street.jpg");
+	image = imread("/Users/jake/Pictures/10997506_10153701034329896_2123105268369710113_o.jpg");
         while (1)
         {
            	capture >> image;
