@@ -16,16 +16,12 @@ Notes:
 	use that to determine a score.  Only lines with a good enough score are kept.
 
 	Calculation for the distance of the car from the center.  This should also determine
-	if the road in turning.  We might not want to be in the center of the road for a turn.
+	if the road in turning. Might not want to be in the center of the road for a turn.
 
 	Several other parameters can be played with: min vote on houghp, line distance and gap.  Some
 	type of feed back loop might be good to self tune these parameters.
 
-	We are still finding the Road, i.e. both left and right lanes.  we Need to set it up to find the
-	yellow divider line in the middle.
-
 	Added filter on theta angle to reduce horizontal and vertical lines.
-
 	Added image ROI to reduce false lines from things like trees/powerlines
 \*------------------------------------------------------------------------------------------*/
 
