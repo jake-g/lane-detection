@@ -61,7 +61,7 @@
 		235E41AE1B0F23FF005671ED /* libopencv_videostab.2.4.11.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 235E41781B0F23FF005671ED /* libopencv_videostab.2.4.11.dylib */; };
 		235E41AF1B0F23FF005671ED /* libopencv_videostab.2.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 235E41791B0F23FF005671ED /* libopencv_videostab.2.4.dylib */; };
 		235E41B01B0F23FF005671ED /* libopencv_videostab.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 235E417A1B0F23FF005671ED /* libopencv_videostab.dylib */; };
-		235E41B41B0F250C005671ED /* LaneDetect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 235E41B31B0F250C005671ED /* LaneDetect.cpp */; };
+		235E41BF1B145A28005671ED /* LaneDetect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 235E41BD1B145A28005671ED /* LaneDetect.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -132,8 +132,8 @@
 		235E41781B0F23FF005671ED /* libopencv_videostab.2.4.11.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_videostab.2.4.11.dylib; path = /usr/local/Cellar/opencv/2.4.11_1/lib/libopencv_videostab.2.4.11.dylib; sourceTree = "<absolute>"; };
 		235E41791B0F23FF005671ED /* libopencv_videostab.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_videostab.2.4.dylib; path = /usr/local/Cellar/opencv/2.4.11_1/lib/libopencv_videostab.2.4.dylib; sourceTree = "<absolute>"; };
 		235E417A1B0F23FF005671ED /* libopencv_videostab.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_videostab.dylib; path = /usr/local/Cellar/opencv/2.4.11_1/lib/libopencv_videostab.dylib; sourceTree = "<absolute>"; };
-		235E41B31B0F250C005671ED /* LaneDetect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LaneDetect.cpp; sourceTree = "<group>"; };
-		235E41B51B0F2538005671ED /* linefinder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = linefinder.h; path = "../../lane-find/linefinder.h"; sourceTree = "<group>"; };
+		235E41BD1B145A28005671ED /* LaneDetect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LaneDetect.cpp; path = src/LaneDetect.cpp; sourceTree = SOURCE_ROOT; };
+		235E41BE1B145A28005671ED /* linefinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = linefinder.h; path = src/linefinder.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,7 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				235E41B11B0F240A005671ED /* lib */,
-				235E40CF1B0F2392005671ED /* lines */,
+				235E40CF1B0F2392005671ED /* src */,
 				235E40CE1B0F2392005671ED /* Products */,
 			);
 			sourceTree = "<group>";
@@ -218,12 +218,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		235E40CF1B0F2392005671ED /* lines */ = {
+		235E40CF1B0F2392005671ED /* src */ = {
 			isa = PBXGroup;
 			children = (
-				235E41B31B0F250C005671ED /* LaneDetect.cpp */,
-				235E41B51B0F2538005671ED /* linefinder.h */,
+				235E41BD1B145A28005671ED /* LaneDetect.cpp */,
+				235E41BE1B145A28005671ED /* linefinder.h */,
 			);
+			name = src;
 			path = lines;
 			sourceTree = "<group>";
 		};
@@ -344,7 +345,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				235E41B41B0F250C005671ED /* LaneDetect.cpp in Sources */,
+				235E41BF1B145A28005671ED /* LaneDetect.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +624,7 @@
 				235E40D61B0F2392005671ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
