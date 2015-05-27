@@ -134,6 +134,15 @@
 		235E417A1B0F23FF005671ED /* libopencv_videostab.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_videostab.dylib; path = /usr/local/Cellar/opencv/2.4.11_1/lib/libopencv_videostab.dylib; sourceTree = "<absolute>"; };
 		235E41BD1B145A28005671ED /* LaneDetect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LaneDetect.cpp; path = src/LaneDetect.cpp; sourceTree = SOURCE_ROOT; };
 		235E41BE1B145A28005671ED /* linefinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = linefinder.h; path = src/linefinder.h; sourceTree = SOURCE_ROOT; };
+		235E41EA1B15B5AA005671ED /* depositphotos_32927489-Hill-on-road-with-speed-bump-sign.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "depositphotos_32927489-Hill-on-road-with-speed-bump-sign.jpg"; sourceTree = "<group>"; };
+		235E41EB1B15B5AA005671ED /* hill.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hill.jpg; sourceTree = "<group>"; };
+		235E41EC1B15B5AA005671ED /* images.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = images.xcworkspace; sourceTree = "<group>"; };
+		235E41ED1B15B5AA005671ED /* steep-hill.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "steep-hill.jpg"; sourceTree = "<group>"; };
+		235E41EE1B15B5AA005671ED /* steep-hill2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "steep-hill2.jpg"; sourceTree = "<group>"; };
+		235E41EF1B15B5AA005671ED /* streeet.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = streeet.jpg; sourceTree = "<group>"; };
+		235E41F01B15B5AA005671ED /* street.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = street.jpg; sourceTree = "<group>"; };
+		235E41F21B15B5AA005671ED /* Camaro Nurburgring Trial.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Camaro Nurburgring Trial.mp4"; sourceTree = "<group>"; };
+		235E41F31B15B5AA005671ED /* pikes peak.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pikes peak.mp4"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +213,8 @@
 		235E40C41B0F2392005671ED = {
 			isa = PBXGroup;
 			children = (
+				235E41E91B15B5AA005671ED /* images */,
+				235E41F11B15B5AA005671ED /* video */,
 				235E41B11B0F240A005671ED /* lib */,
 				235E40CF1B0F2392005671ED /* src */,
 				235E40CE1B0F2392005671ED /* Products */,
@@ -287,6 +298,29 @@
 				235E417A1B0F23FF005671ED /* libopencv_videostab.dylib */,
 			);
 			name = lib;
+			sourceTree = "<group>";
+		};
+		235E41E91B15B5AA005671ED /* images */ = {
+			isa = PBXGroup;
+			children = (
+				235E41EA1B15B5AA005671ED /* depositphotos_32927489-Hill-on-road-with-speed-bump-sign.jpg */,
+				235E41EB1B15B5AA005671ED /* hill.jpg */,
+				235E41EC1B15B5AA005671ED /* images.xcworkspace */,
+				235E41ED1B15B5AA005671ED /* steep-hill.jpg */,
+				235E41EE1B15B5AA005671ED /* steep-hill2.jpg */,
+				235E41EF1B15B5AA005671ED /* streeet.jpg */,
+				235E41F01B15B5AA005671ED /* street.jpg */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		235E41F11B15B5AA005671ED /* video */ = {
+			isa = PBXGroup;
+			children = (
+				235E41F21B15B5AA005671ED /* Camaro Nurburgring Trial.mp4 */,
+				235E41F31B15B5AA005671ED /* pikes peak.mp4 */,
+			);
+			path = video;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
