@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "container:../lines/lines.xcodeproj">
+   </FileRef>
+   <Group
+      location = "container:"
+      name = "images">
+      <FileRef
+         location = "group:steep-hill2.jpg">
+      </FileRef>
+      <FileRef
+         location = "group:streeet.jpg">
+      </FileRef>
+      <FileRef
+         location = "group:depositphotos_32927489-Hill-on-road-with-speed-bump-sign.jpg">
+      </FileRef>
+      <FileRef
+         location = "group:steep-hill.jpg">
+      </FileRef>
+      <FileRef
+         location = "group:hill.jpg">
+      </FileRef>
+      <FileRef
+         location = "group:street.jpg">
+      </FileRef>
+   </Group>
+</Workspace>
