@@ -1,11 +1,6 @@
 /*------------------------------------------------------------------------------------------*\
-   Lane Detection
-
-   General idea and some code modified from:
-   chapter 7 of Computer Vision Programming using the OpenCV Library.
-   by Robert Laganiere, Packt Publishing, 2011.
-
-\*------------------------------------------------------------------------------------------*/
+ Lane Detection header file
+ \*------------------------------------------------------------------------------------------*/
 
 #if !defined LINEF
 #define LINEF
@@ -16,142 +11,201 @@
 
 class LineFinder {
 
-  private:
+private:
 
-	  // original image
-	  cv::Mat img;
+    // original image
+    cv::Mat img;
 
-	  // vector containing the end points
-	  // of the detected lines
-	  std::vector<cv::Vec4i> lines;
+    // vector containing the end points
+    // of the detected lines
+    std::vector<cv::Vec4i> lines;
 
-	  // accumulator resolution parameters
-	  double deltaRho;
-	  double deltaTheta;
+    // accumulator resolution parameters
+    double deltaRho;
+    double deltaTheta;
 
-	  // minimum number of votes that a line
-	  // must receive before being considered
-	  int minVote;
+    // minimum number of votes that a line
+    // must receive before being considered
+    int minVote;
 
-	  // min length for a line
-	  double minLength;
+    // min length for a line
+    double minLength;
 
-	  // max allowed gap along the line
-	  double maxGap;
+    // max allowed gap along the line
+    double maxGap;
 
-	  // distance to shift the drawn lines down when using a ROI
-	  int shift;
+    // distance to shift the drawn lines down when using a ROI
+    int shiftV;
+    int shiftH;
 
-  public:
+public:
 
-	  // Default accumulator resolution is 1 pixel by 1 degree
-	  // no gap, no mimimum length
-	  LineFinder() : deltaRho(1), deltaTheta(PI/180), minVote(10), minLength(0.), maxGap(0.) {}
+    // Default accumulator resolution is 1 pixel by 1 degree
+    // no gap, no mimimum length
+    LineFinder() : deltaRho(1), deltaTheta(PI/180), minVote(10), minLength(0.), maxGap(0.) {}
 
-	  // Set the resolution of the accumulator
-	  void setAccResolution(double dRho, double dTheta) {
+    // Set the resolution of the accumulator
+    void setAccResolution(double dRho, double dTheta) {
 
-		  deltaRho= dRho;
-		  deltaTheta= dTheta;
-	  }
+        deltaRho= dRho;
+        deltaTheta= dTheta;
+    }
 
-	  // Set the minimum number of votes
-	  void setMinVote(int minv) {
+    // Set the minimum number of votes
+    void setMinVote(int minv) {
 
-		  minVote= minv;
-	  }
+        minVote= minv;
+    }
 
-	  // Set line length and gap
-	  void setLineLengthAndGap(double length, double gap) {
+    // Set line length and gap
+    void setLineLengthAndGap(double length, double gap) {
 
-		  minLength= length;
-		  maxGap= gap;
-	  }
+        minLength= length;
+        maxGap= gap;
+    }
 
-	  // set image shift
-	  void setShift(int imgShift) {
+    // set image shift
+    void setShift(int Vshift, int Hshift) {
 
-		  shift = imgShift;
-	  }
+        shiftV = Vshift;
+        shiftH = Hshift;
+    }
 
-	  // Apply probabilistic Hough Transform
-	  std::vector<cv::Vec4i> findLines(cv::Mat& binary) {
+    // Apply probabilistic Hough Transform
+    std::vector<cv::Vec4i> findLines(cv::Mat& binary) {
 
-		  lines.clear();
-		  cv::HoughLinesP(binary,lines,deltaRho,deltaTheta,minVote, minLength, maxGap);
+        lines.clear();
+        cv::HoughLinesP(binary,lines,deltaRho,deltaTheta,minVote, minLength, maxGap);
 
-		  return lines;
-	  }
+        return lines;
+    }
 
-	  // Draw the detected lines on an image
-	  void drawDetectedLines(cv::Mat &image, cv::Scalar color=cv::Scalar(255)) {
+    // Draw the detected lines on an image
+    void drawDetectedLines(cv::Mat &image, cv::Scalar color=cv::Scalar(204,0,102)) {
 
-		  // Draw the lines
-		  std::vector<cv::Vec4i>::const_iterator it2= lines.begin();
+        // Draw the lines
+        std::vector<cv::Vec4i>::const_iterator it2= lines.begin();
 
-		  while (it2!=lines.end()) {
+        while (it2!=lines.end()) {
 
-			  cv::Point pt1((*it2)[0],(*it2)[1]+shift);
-			  cv::Point pt2((*it2)[2],(*it2)[3]+shift);
+            cv::Point pt1((*it2)[0]+shiftH,(*it2)[1]+shiftV);
+            cv::Point pt2((*it2)[2]+shiftH,(*it2)[3]+shiftV);
 
-			  cv::line( image, pt1, pt2, color, 6 );
-		std::cout << " HoughP line: ("<< pt1 <<"," << pt2 << ")\n";
-			  ++it2;
-		  }
-	  }
+            //thickness = 2
+            cv::line( image, pt1, pt2, color, 2 );
 
-	  // Eliminates lines that do not have an orientation equals to
-	  // the ones specified in the input matrix of orientations
-	  // At least the given percentage of pixels on the line must
-	  // be within plus or minus delta of the corresponding orientation
-	  std::vector<cv::Vec4i> removeLinesOfInconsistentOrientations(
-		  const cv::Mat &orientations, double percentage, double delta) {
+            std::cout << " HoughP line: ("<< pt1 <<"," << pt2 << ")\n";
+            ++it2;
+        }
+    }
 
-			  std::vector<cv::Vec4i>::iterator it= lines.begin();
+    cv::Point drawIntersectionPunto(cv::Mat &image, int tolerance) {
 
-			  // check all lines
-			  while (it!=lines.end()) {
+        std::vector<cv::Vec4i>::const_iterator it2= lines.begin();
 
-				  // end points
-				  int x1= (*it)[0];
-				  int y1= (*it)[1];
-				  int x2= (*it)[2];
-				  int y2= (*it)[3];
+        int cols = image.cols;
+        int rows = image.rows;
+        int intXCount[cols];
+        int intYCount[rows];
 
-				  // line orientation + 90o to get the parallel line
-				  double ori1= atan2(static_cast<double>(y1-y2),static_cast<double>(x1-x2))+PI/2;
-				  if (ori1>PI) ori1= ori1-2*PI;
+        std::fill_n(intXCount, cols, 0);
+        std::fill_n(intYCount, rows, 0);
 
-				  double ori2= atan2(static_cast<double>(y2-y1),static_cast<double>(x2-x1))+PI/2;
-				  if (ori2>PI) ori2= ori2-2*PI;
+        while(it2!=lines.end()) {
 
-				  // for all points on the line
-				  cv::LineIterator lit(orientations,cv::Point(x1,y1),cv::Point(x2,y2));
-				  int i,count=0;
-				  for(i = 0, count=0; i < lit.count; i++, ++lit) {
+            cv::Point pt1((*it2)[0]+shiftH, (*it2)[1]+shiftV);
+            cv::Point pt2((*it2)[2]+shiftH, (*it2)[3]+shiftV);
 
-					  float ori= *(reinterpret_cast<float *>(*lit));
+            std::vector<cv::Vec4i>::const_iterator it3= lines.begin();
 
-					  // is line orientation similar to gradient orientation ?
-					  if (std::min(fabs(ori-ori1),fabs(ori-ori2))<delta)
-						  count++;
+            while(it3!=lines.end()) {
 
-				  }
+                cv::Point pt3((*it3)[0]+shiftH, (*it3)[1]+shiftV);
+                cv::Point pt4((*it3)[2]+shiftH, (*it3)[3]+shiftV);
 
-				  double consistency= count/static_cast<double>(i);
+                cv::Point intPnt;
+                bool intersect = getIntersectionPoint(pt1, pt2, pt3, pt4, intPnt);
+                if(intersect) {
+                    double theta1 = (*it2)[1];
+                    double theta2 = (*it3)[1];
+                    bool convergent = (theta1 > 1.48 && theta2 < 1.48) || (theta1 < 1.48 && theta2 > 1.48);
+                    if(convergent && intPnt.x < cols && intPnt.y < rows) {
+                        intXCount[intPnt.x] += 1;
+                        intYCount[intPnt.y] += 1;
+                    }
 
-				  // set to zero lines of inconsistent orientation
-				  if (consistency < percentage) {
+//                    // red dot on midpoint!
+//                    cv::Point mid = 0.5*(pt1+pt2); // midpoint
+//                    drawPoint(image, mid);  // draw midpoint
 
-					  (*it)[0]=(*it)[1]=(*it)[2]=(*it)[3]=0;
+                    std::cout << " found point: ("<< intPnt <<") \n";
+                }
+                ++it3;
+            }
+            ++it2;
+        }
 
-				  }
+        cv::Point intersectPt;
+        int x = getCoord(intXCount, cols, tolerance);
+        int y = getCoord(intYCount, rows, tolerance);
+        if(x != -1) {
+            intersectPt.x = x;
+            intersectPt.y = y;
+            drawPoint(image, intersectPt);
+        }
+        return intersectPt;
+    }
 
-				  ++it;
-			  }
+    int getCoord(int* dimCount, int dim, int tol) {
+        int i, coordCount = 0, max = 0, coord = -1, itr = 0;
+        for(i = 0; i < dim; i++) {
+            if(itr == tol) {
+                if(coordCount > max) {
+                    max = coordCount;
+                    coord = i + tol / 2;
+                }
+                coordCount = 0;
+                itr = 0;
+            } else if(dimCount[i] != 0) {
+                int c = dimCount[i];
+                coordCount += c;
+            }
+            itr++;
+        }
+        return coord;
+    }
 
-			  return lines;
-	  }
+    // Draw the detected intersection point on an image
+    void drawPoint(cv::Mat &image, cv::Point center) {
+
+        cv::Scalar color=cv::Scalar(0,0,255); // line color
+        int rad = 4;
+        cv::circle( image, center, rad, color, -1, 8 );
+
+    }
+
+    // Line intersection function
+    // http://stackoverflow.com/questions/563198/how-do-you-detect-where-two-line-segments-intersect
+    bool getIntersectionPoint(cv::Point a1, cv::Point a2, cv::Point b1, cv::Point b2, cv::Point & intPnt){
+        cv::Point p = a1;
+        cv::Point q = b1;
+        cv::Point r(a2-a1);
+        cv::Point s(b2-b1);
+
+        if(cross(r,s) == 0) {
+            return false;}
+
+        double t = cross(q-p,s)/cross(r,s);
+
+        intPnt = p + t*r;
+        std::cout << " Intersection: True\n";
+        return true;
+    }
+
+    double cross(cv::Point v1,cv::Point v2){
+        return v1.x*v2.y - v1.y*v2.x;
+    }
+
 };
 
 

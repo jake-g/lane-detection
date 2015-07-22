@@ -64,6 +64,16 @@
 		235E41BF1B145A28005671ED /* LaneDetect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 235E41BD1B145A28005671ED /* LaneDetect.cpp */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		23E54FE01B24379300E6E713 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 23E54FDC1B24379300E6E713 /* examples.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 23E54FD21B24379300E6E713;
+			remoteInfo = examples;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		235E40CB1B0F2392005671ED /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -141,8 +151,9 @@
 		235E41EE1B15B5AA005671ED /* steep-hill2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "steep-hill2.jpg"; sourceTree = "<group>"; };
 		235E41EF1B15B5AA005671ED /* streeet.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = streeet.jpg; sourceTree = "<group>"; };
 		235E41F01B15B5AA005671ED /* street.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = street.jpg; sourceTree = "<group>"; };
-		235E41F21B15B5AA005671ED /* Camaro Nurburgring Trial.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Camaro Nurburgring Trial.mp4"; sourceTree = "<group>"; };
 		235E41F31B15B5AA005671ED /* pikes peak.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pikes peak.mp4"; sourceTree = "<group>"; };
+		23E54FC81B2421D400E6E713 /* canny.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = canny.cpp; path = src/canny.cpp; sourceTree = SOURCE_ROOT; };
+		23E54FDC1B24379300E6E713 /* examples.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = examples.xcodeproj; path = ../opencv_examples/examples/examples.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +224,7 @@
 		235E40C41B0F2392005671ED = {
 			isa = PBXGroup;
 			children = (
+				23E54FDC1B24379300E6E713 /* examples.xcodeproj */,
 				235E41E91B15B5AA005671ED /* images */,
 				235E41F11B15B5AA005671ED /* video */,
 				235E41B11B0F240A005671ED /* lib */,
@@ -233,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				235E41BD1B145A28005671ED /* LaneDetect.cpp */,
+				23E54FC81B2421D400E6E713 /* canny.cpp */,
 				235E41BE1B145A28005671ED /* linefinder.h */,
 			);
 			name = src;
@@ -317,10 +330,17 @@
 		235E41F11B15B5AA005671ED /* video */ = {
 			isa = PBXGroup;
 			children = (
-				235E41F21B15B5AA005671ED /* Camaro Nurburgring Trial.mp4 */,
 				235E41F31B15B5AA005671ED /* pikes peak.mp4 */,
 			);
 			path = video;
+			sourceTree = "<group>";
+		};
+		23E54FDD1B24379300E6E713 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				23E54FE11B24379300E6E713 /* examples */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -367,12 +387,28 @@
 			mainGroup = 235E40C41B0F2392005671ED;
 			productRefGroup = 235E40CE1B0F2392005671ED /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 23E54FDD1B24379300E6E713 /* Products */;
+					ProjectRef = 23E54FDC1B24379300E6E713 /* examples.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				235E40CC1B0F2392005671ED /* lines */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		23E54FE11B24379300E6E713 /* examples */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = examples;
+			remoteRef = 23E54FE01B24379300E6E713 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		235E40C91B0F2392005671ED /* Sources */ = {
@@ -471,18 +507,19 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/include,
 					"#include",
-					"<iostream>\n#include",
-					"<opencv2/opencv.hpp>\n\nint",
+					"<iostream>",
+					"#include",
+					"<opencv2/opencv.hpp>",
+					int,
 					"main(int",
 					"argc,",
 					char,
-					"*argv[])\n{\n",
+					"*argv[])",
+					"{",
 					"//",
 					Open,
 					the,
-					"file.\n",
-					"
-",
+					file.,
 					IplImage,
 					"*img",
 					"=",
@@ -492,30 +529,21 @@
 					"3);",
 					"//if",
 					"(!img)",
-					"{
-",
-					"
-",
+					"{",
 					"//",
-					"printf(\"Error: Couldn't open the image file.\\n\");\n",
+					"printf(\"Error: Couldn't open the image file.\\n\");",
 					"//",
 					return,
-					"1;
-",
-					"//}
-",
-					"
-",
+					"1;",
+					"//}",
 					"//",
 					Display,
 					the,
-					"image.\n",
+					image.,
 					"cvNamedWindow(\"Image:\",",
-					"CV_WINDOW_AUTOSIZE);\n",
+					"CV_WINDOW_AUTOSIZE);",
 					"cvShowImage(\"Image:\",",
-					"img);\n",
-					"
-",
+					"img);",
 					"//",
 					Wait,
 					for,
@@ -528,20 +556,17 @@
 					in,
 					the,
 					GUI,
-					"window.\n",
-					"cvWaitKey(0);\n",
+					window.,
+					"cvWaitKey(0);",
 					"//",
 					Free,
 					the,
-					"resources.\n",
-					"cvDestroyWindow(\"Image:\");\n",
-					"cvReleaseImage(&img);\n",
-					"
-",
+					resources.,
+					"cvDestroyWindow(\"Image:\");",
+					"cvReleaseImage(&img);",
 					return,
-					"0;
-}
-",
+					"0;",
+					"}",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -559,18 +584,19 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/include,
 					"#include",
-					"<iostream>\n#include",
-					"<opencv2/opencv.hpp>\n\nint",
+					"<iostream>",
+					"#include",
+					"<opencv2/opencv.hpp>",
+					int,
 					"main(int",
 					"argc,",
 					char,
-					"*argv[])\n{\n",
+					"*argv[])",
+					"{",
 					"//",
 					Open,
 					the,
-					"file.\n",
-					"
-",
+					file.,
 					IplImage,
 					"*img",
 					"=",
@@ -580,30 +606,21 @@
 					"3);",
 					"//if",
 					"(!img)",
-					"{
-",
-					"
-",
+					"{",
 					"//",
-					"printf(\"Error: Couldn't open the image file.\\n\");\n",
+					"printf(\"Error: Couldn't open the image file.\\n\");",
 					"//",
 					return,
-					"1;
-",
-					"//}
-",
-					"
-",
+					"1;",
+					"//}",
 					"//",
 					Display,
 					the,
-					"image.\n",
+					image.,
 					"cvNamedWindow(\"Image:\",",
-					"CV_WINDOW_AUTOSIZE);\n",
+					"CV_WINDOW_AUTOSIZE);",
 					"cvShowImage(\"Image:\",",
-					"img);\n",
-					"
-",
+					"img);",
 					"//",
 					Wait,
 					for,
@@ -616,20 +633,17 @@
 					in,
 					the,
 					GUI,
-					"window.\n",
-					"cvWaitKey(0);\n",
+					window.,
+					"cvWaitKey(0);",
 					"//",
 					Free,
 					the,
-					"resources.\n",
-					"cvDestroyWindow(\"Image:\");\n",
-					"cvReleaseImage(&img);\n",
-					"
-",
+					resources.,
+					"cvDestroyWindow(\"Image:\");",
+					"cvReleaseImage(&img);",
 					return,
-					"0;
-}
-",
+					"0;",
+					"}",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
